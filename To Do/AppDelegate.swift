@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,8 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let isUserLoggedIn:Bool = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        if(isUserLoggedIn) {
+            print("user is logged in")
+//            let vc = UIStoryboard(name:"ListItemsView", bundle:nil).instantiateViewController(withIdentifier: "listItem") as? ListItemTableViewController
+//            let protectedPage = rootViewController?.pushViewController(vc!, animated:true)
+//            window!.rootViewController = protectedPage
+//            window!.makeKeyAndVisible()
+        } else {
+            print("user isn't logged in")
+        }
+        
         return true
+    }
+    override init() {
+        super.init()
+        FIRApp.configure()
+        // not really needed unless you really need it FIRDatabase.database().persistenceEnabled = true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
