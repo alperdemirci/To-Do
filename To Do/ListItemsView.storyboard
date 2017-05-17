@@ -13,7 +13,6 @@
         <!--List Item Table View Controller-->
         <scene sceneID="jqX-1e-Qh9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q8j-BE-rjr" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="listItem" id="25b-zk-YmU" customClass="ListItemTableViewController" customModule="To_Do" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7uY-ga-srh"/>
@@ -23,51 +22,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MnK-0y-D9Q">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MnK-0y-D9Q">
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemListCell" id="3oO-HO-pw2" customClass="ListItemTableViewCell" customModule="To_Do" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemListCell" rowHeight="200" id="3oO-HO-pw2" customClass="ListItemTableViewCell" customModule="To_Do" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3oO-HO-pw2" id="qSk-8L-Zvn">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You dont have any todo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iF-Rc-hed">
+                                                    <rect key="frame" x="8" y="8" width="343" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKq-IN-Mt4">
+                                                    <rect key="frame" x="10" y="28.5" width="229" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="229" id="1JB-NL-e8t"/>
+                                                        <constraint firstAttribute="height" constant="19" id="CvO-je-q4o"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sharedButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="9md-YT-icx"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4iF-Rc-hed" firstAttribute="width" secondItem="qSk-8L-Zvn" secondAttribute="width" id="Yqs-4w-Xia"/>
+                                                <constraint firstItem="YKq-IN-Mt4" firstAttribute="top" secondItem="4iF-Rc-hed" secondAttribute="bottom" id="Yrr-ng-D9h"/>
+                                                <constraint firstItem="YKq-IN-Mt4" firstAttribute="leading" secondItem="qSk-8L-Zvn" secondAttribute="leading" constant="10" id="Z23-rd-rfR"/>
+                                                <constraint firstItem="4iF-Rc-hed" firstAttribute="top" secondItem="qSk-8L-Zvn" secondAttribute="topMargin" id="pVf-tu-DhI"/>
+                                                <constraint firstItem="4iF-Rc-hed" firstAttribute="leading" secondItem="qSk-8L-Zvn" secondAttribute="leadingMargin" id="sfM-7b-xZr"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="sharedButton" destination="YKq-IN-Mt4" id="H0W-df-oI9"/>
+                                            <outlet property="sharedEmailChange" destination="YKq-IN-Mt4" id="62T-i6-VRx"/>
+                                            <outlet property="todoLabel" destination="4iF-Rc-hed" id="gz7-mL-ofF"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="25b-zk-YmU" id="kTO-W5-nFM"/>
+                                    <outlet property="delegate" destination="25b-zk-YmU" id="z9i-t6-g8E"/>
+                                </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VnQ-2U-3E4">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="zus-pA-Xwc">
-                                        <barButtonItem key="rightBarButtonItem" title="Add" id="THI-8j-1yZ">
-                                            <connections>
-                                                <action selector="addViewControllerCalled:" destination="25b-zk-YmU" id="Ozh-eZ-e4k"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="VnQ-2U-3E4" secondAttribute="trailing" id="Bk1-YW-RmB"/>
-                            <constraint firstItem="MnK-0y-D9Q" firstAttribute="top" secondItem="VnQ-2U-3E4" secondAttribute="bottom" id="GB3-Lg-0E7"/>
+                            <constraint firstItem="YDg-PD-7IU" firstAttribute="top" secondItem="MnK-0y-D9Q" secondAttribute="bottom" id="EIs-tC-P5B"/>
                             <constraint firstItem="MnK-0y-D9Q" firstAttribute="leading" secondItem="KGQ-nd-saH" secondAttribute="leadingMargin" id="Qwq-tH-Oan"/>
+                            <constraint firstItem="MnK-0y-D9Q" firstAttribute="leading" secondItem="KGQ-nd-saH" secondAttribute="leadingMargin" id="SQb-lN-7Ph"/>
                             <constraint firstItem="YDg-PD-7IU" firstAttribute="top" secondItem="MnK-0y-D9Q" secondAttribute="bottom" id="XCg-bD-x8g"/>
-                            <constraint firstItem="VnQ-2U-3E4" firstAttribute="top" secondItem="7uY-ga-srh" secondAttribute="bottom" id="lEV-w4-oxl"/>
+                            <constraint firstItem="MnK-0y-D9Q" firstAttribute="trailing" secondItem="KGQ-nd-saH" secondAttribute="trailingMargin" id="Y6m-f6-bgt"/>
+                            <constraint firstItem="MnK-0y-D9Q" firstAttribute="top" secondItem="7uY-ga-srh" secondAttribute="bottom" id="kT2-io-MdV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MnK-0y-D9Q" secondAttribute="trailing" id="lsu-1A-5HU"/>
-                            <constraint firstItem="VnQ-2U-3E4" firstAttribute="leading" secondItem="KGQ-nd-saH" secondAttribute="leading" id="nuK-gf-OUK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Liz-dH-M4q"/>
                     <connections>
                         <outlet property="tableView" destination="MnK-0y-D9Q" id="7PQ-WX-5Od"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q8j-BE-rjr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895.2" y="-235.23238380809596"/>
+            <point key="canvasLocation" x="1792.8" y="-288.30584707646182"/>
         </scene>
     </scenes>
 </document>
