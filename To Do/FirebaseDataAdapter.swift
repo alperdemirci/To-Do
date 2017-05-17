@@ -9,18 +9,109 @@
 import UIKit
 import Firebase
 
+typealias AuthBlock = (_ user: FIRUser?, _ error: NSError?) -> ()
+typealias ListStreamBlock = (FIRDataSnapshot!) -> ()
+
 enum FirebaseError: Error {
-    case uidNotFound
+    case userIdNotFound
+}
+
+enum AuthProvider {
+    case authEmail
+    case authAnonymous
+    case authFacebook
+    case authGoogle
+    case authTwitter
+    case authCustom
 }
 
 class FirebaseDataAdapter {
-//    var firebaseRef: FIRDatabaseReference
-//    var videoRef: FIRStorageReference
-//    
-//    init() {
-//        firebaseRef = FIRDatabase.database().reference()
-//        videoRef = FIRStorage.storage().reference().child("user_videos")
-//    }
+    var firebaseRef: FIRDatabaseReference
+    var imageRef: FIRStorageReference
     
+    init() {
+        firebaseRef = FIRDatabase.database().reference()
+        imageRef = FIRStorage.storage().reference().child("user_images")
+        FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
+            if let user = user {
+                // User is signed in.
+                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                UserDefaults.standard.synchronize()
+            } else {
+                print("alper lost connections")
+                // No user is signed in.
+            }
+        }
+    }
 
+    func CreateUserAccount(_ email: String, password: String, userName: String?, completionBlock: AuthBlock? ) {
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+            completionBlock!(user, error as NSError?)
+            if error != nil {
+                return
+            }
+            guard let uid = user?.uid else {
+                return
+            }
+            let userReferences = self.firebaseRef.child("Users").child(uid)
+            //initial DB data
+            let value = ["username": userName!,
+                         "email": email,
+                         "todo": ""]
+            userReferences.updateChildValues(value, withCompletionBlock: { (err, ref) in
+                if err != nil {
+                    return
+                }
+                //blah blah blah
+            })
+        })
+    }
+    
+    func writeTodoIntoDB(value: String,date: Date ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
+            let valueWithTimestamp = ["value":value,
+                                      "sharedEmail":sharedEmail,
+                                    "timestamp":Date.ISOStringFromDate(date)]
+            refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
+                if error != nil {
+                    print(error)
+                } else {
+                    print(ref)
+                    onAddCompletionBlock(true)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Profile Methods
+    func userSignIn(_ email: String, password: String, completionBlock: AuthBlock? ) {
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            completionBlock!(user, error as NSError?)
+        })
+    }
+    
+    func retriveTodosFromDB(onDemand: @escaping ListStreamBlock)  -> FIRDatabaseHandle?  {
+        guard let userID = FIRAuth.auth()?.currentUser?.uid else {
+            return nil
+        }
+            let refPath = firebaseRef.child("Users").child("\(userID)/todo/")
+            return refPath.observe(.childAdded, with: onDemand)
+    }
+    
+    //FIXME: should refactor this method
+    func getTodoList(onDemand: @escaping ListStreamBlock) -> FIRDatabaseHandle? {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let chatRef = self.firebaseRef.child("Users").child("\(userID)/todo/")
+            let messagesQuery = chatRef.queryLimited(toLast: 25)
+            return messagesQuery.observe(.childAdded, with: onDemand)
+        }
+        return nil
+    }
+    
+    
+    
+    
+    
+    
 }
