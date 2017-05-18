@@ -36,6 +36,9 @@ PODS:
   - FirebaseStorage (1.1.0):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FoldingCell (1.0.0)
+  - GeoFire (2.0.0):
+    - Firebase/Database (~> 3.2)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -50,7 +53,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
   - Protobuf (3.2.1)
-  - ZoomTransitioning (1.4.1)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -58,7 +61,29 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
-  - ZoomTransitioning
+  - FoldingCell (from `https://github.com/stephangopaul/folding-cell.git`, branch `swift3`)
+  - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  FoldingCell:
+    :branch: swift3
+    :git: https://github.com/stephangopaul/folding-cell.git
+  GeoFire:
+    :git: https://github.com/firebase/geofire-objc.git
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  FoldingCell:
+    :commit: 2310273291bd6ce8bdcca65efce54cf14b37df96
+    :git: https://github.com/stephangopaul/folding-cell.git
+  GeoFire:
+    :commit: dbb8d193f5ee1371837800d0502bd29cba779da4
+    :git: https://github.com/firebase/geofire-objc.git
+  SwiftyJSON:
+    :commit: 4a62eb3a37e1e694a7f83d50093e803f966055ba
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
@@ -69,11 +94,13 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   FirebaseMessaging: 753d05a925e9eb8eadd09a0ffc9b808578b72fac
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
+  FoldingCell: ca0b0f73a853143bf7d968c04a6604d25fbf1af7
+  GeoFire: ef73103b88eb026c27212c40ea16757d6ad362ea
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   Protobuf: 2ccbaf193f6c65adc67745453ca0c13234c32796
-  ZoomTransitioning: 42d9ad29c83d896f3fe28c324a4fe98ac821f0dd
+  SwiftyJSON: 05cf0e98a950e2ba343735264f5a96b81e755d00
 
-PODFILE CHECKSUM: 1516289c545894e516880e80570f098948a142cc
+PODFILE CHECKSUM: 201960f047fc6254d8d7d918ac2cf191c1592691
 
 COCOAPODS: 1.2.1
