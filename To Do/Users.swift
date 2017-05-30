@@ -8,8 +8,9 @@
 
 import UIKit
 
-class User: NSObject {
+class Users: NSObject {
     var sharedEmail: String?
     var timestamp: String?
     var value: String?
+    var timestampfuture: String?
 }
