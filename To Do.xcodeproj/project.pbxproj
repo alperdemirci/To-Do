@@ -10,7 +10,9 @@
 		262F2AE3CE9B5D47F0BF40A2 /* Pods_To_Do.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A3E683D48D94131C4E37B6 /* Pods_To_Do.framework */; };
 		428C0D77571FC072AC90D005 /* Pods_To_DoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E019BA91AA078CBCD98FEC /* Pods_To_DoTests.framework */; };
 		4E173F771ECB971500345D06 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E173F761ECB971500345D06 /* NavigationViewController.swift */; };
-		4E2EF6541ECB7C9A0067782E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2EF6531ECB7C9A0067782E /* User.swift */; };
+		4E2EF6541ECB7C9A0067782E /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2EF6531ECB7C9A0067782E /* Users.swift */; };
+		4EAA900F1ED34CE500A769CB /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EAA900D1ED34CE500A769CB /* MapView.storyboard */; };
+		4EAA90101ED34CE500A769CB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA900E1ED34CE500A769CB /* MapViewController.swift */; };
 		4EE6F0191EC4F4C10014F20F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F0181EC4F4C10014F20F /* AppDelegate.swift */; };
 		4EE6F01B1EC4F4C10014F20F /* ListItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F01A1EC4F4C10014F20F /* ListItemTableViewController.swift */; };
 		4EE6F01E1EC4F4C10014F20F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE6F01C1EC4F4C10014F20F /* Main.storyboard */; };
@@ -52,7 +54,9 @@
 		3121A3AB97E4EF4963CE9829 /* Pods_To_DoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_To_DoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4956C2E3353F5A56FCA45F62 /* Pods-To DoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-To DoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-To DoTests/Pods-To DoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4E173F761ECB971500345D06 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		4E2EF6531ECB7C9A0067782E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4E2EF6531ECB7C9A0067782E /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		4EAA900D1ED34CE500A769CB /* MapView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
+		4EAA900E1ED34CE500A769CB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4EE6F0151EC4F4C10014F20F /* To Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "To Do.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE6F0181EC4F4C10014F20F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE6F01A1EC4F4C10014F20F /* ListItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewController.swift; sourceTree = "<group>"; };
@@ -127,10 +131,19 @@
 			children = (
 				4E173F761ECB971500345D06 /* NavigationViewController.swift */,
 				4EE6F05A1EC61CB40014F20F /* FirebaseDataAdapter.swift */,
-				4E2EF6531ECB7C9A0067782E /* User.swift */,
+				4E2EF6531ECB7C9A0067782E /* Users.swift */,
 				4EE6F0601ECB1A670014F20F /* TodoExtensions.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		4EAA90111ED35AC800A769CB /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				4EAA900D1ED34CE500A769CB /* MapView.storyboard */,
+				4EAA900E1ED34CE500A769CB /* MapViewController.swift */,
+			);
+			name = MapView;
 			sourceTree = "<group>";
 		};
 		4EE6F00C1EC4F4C10014F20F = {
@@ -162,6 +175,7 @@
 				4E173F781ECB979700345D06 /* Model */,
 				4EE6F0481EC4FD8E0014F20F /* InitialViewController.swift */,
 				4EE6F01C1EC4F4C10014F20F /* Main.storyboard */,
+				4EAA90111ED35AC800A769CB /* MapView */,
 				4EE6F04E1EC503D40014F20F /* ListItems */,
 				4EE6F04F1EC5131A0014F20F /* AddNew */,
 				4EE6F01F1EC4F4C10014F20F /* Assets.xcassets */,
@@ -337,6 +351,7 @@
 			files = (
 				4EE6F0231EC4F4C10014F20F /* LaunchScreen.storyboard in Resources */,
 				4EE6F0201EC4F4C10014F20F /* Assets.xcassets in Resources */,
+				4EAA900F1ED34CE500A769CB /* MapView.storyboard in Resources */,
 				4EE6F04B1EC4FFFC0014F20F /* AddNewItem.storyboard in Resources */,
 				4EE6F01E1EC4F4C10014F20F /* Main.storyboard in Resources */,
 				4EE6F0531EC514420014F20F /* ListItemsView.storyboard in Resources */,
@@ -507,8 +522,9 @@
 				4EE6F0611ECB1A670014F20F /* TodoExtensions.swift in Sources */,
 				4EE6F01B1EC4F4C10014F20F /* ListItemTableViewController.swift in Sources */,
 				4E173F771ECB971500345D06 /* NavigationViewController.swift in Sources */,
+				4EAA90101ED34CE500A769CB /* MapViewController.swift in Sources */,
 				4EE6F0191EC4F4C10014F20F /* AppDelegate.swift in Sources */,
-				4E2EF6541ECB7C9A0067782E /* User.swift in Sources */,
+				4E2EF6541ECB7C9A0067782E /* Users.swift in Sources */,
 				4EE6F0471EC4F6670014F20F /* AddNewItemViewController.swift in Sources */,
 				4EE6F05B1EC61CB40014F20F /* FirebaseDataAdapter.swift in Sources */,
 				4EE6F0491EC4FD8E0014F20F /* InitialViewController.swift in Sources */,

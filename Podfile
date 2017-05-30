@@ -11,9 +11,9 @@ target 'To Do' do
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
-    pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+    #pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
     pod 'FoldingCell', :git=> 'https://github.com/stephangopaul/folding-cell.git', :branch => 'swift3'
-        
+    pod 'PromiseKit', '~>4.0'        
 target 'To DoTests' do
         inherit! :search_paths
         pod 'Firebase/Core'

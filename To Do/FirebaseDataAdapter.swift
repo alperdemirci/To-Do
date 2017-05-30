@@ -9,8 +9,8 @@
 import UIKit
 import Firebase
 
-typealias AuthBlock = (_ user: FIRUser?, _ error: NSError?) -> ()
-typealias ListStreamBlock = (FIRDataSnapshot!) -> ()
+typealias AuthBlock = (_ user: User?, _ error: NSError?) -> ()
+typealias ListStreamBlock = (DataSnapshot!) -> ()
 
 enum FirebaseError: Error {
     case userIdNotFound
@@ -26,14 +26,14 @@ enum AuthProvider {
 }
 
 class FirebaseDataAdapter {
-    var firebaseRef: FIRDatabaseReference
-    var imageRef: FIRStorageReference
+    var firebaseRef: DatabaseReference
+    var imageRef: StorageReference
     
     init() {
-        firebaseRef = FIRDatabase.database().reference()
-        imageRef = FIRStorage.storage().reference().child("user_images")
-        FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
-            if let user = user {
+        firebaseRef = Database.database().reference()
+        imageRef = Storage.storage().reference().child("user_images")
+        Auth.auth().addStateDidChangeListener() { (auth, user) in
+            if user != nil {
                 // User is signed in.
                 UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
                 UserDefaults.standard.synchronize()
@@ -45,7 +45,7 @@ class FirebaseDataAdapter {
     }
 
     func CreateUserAccount(_ email: String, password: String, userName: String?, completionBlock: AuthBlock? ) {
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             completionBlock!(user, error as NSError?)
             if error != nil {
                 return
@@ -68,14 +68,15 @@ class FirebaseDataAdapter {
     }
     
     func writeTodoIntoDB(value: String,date: Date ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
-        if let userID = FIRAuth.auth()?.currentUser?.uid {
+        if let userID = Auth.auth().currentUser?.uid {
             let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
             let valueWithTimestamp = ["value":value,
                                       "sharedEmail":sharedEmail,
-                                    "timestamp":Date.ISOStringFromDate(date)]
+                                    "timestampcurrent":Date.ISOStringFromDate(date),
+                                    "timestampfuture":""]
             refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
                 if error != nil {
-                    print(error)
+                    print(error ?? "error")
                 } else {
                     print(ref)
                     onAddCompletionBlock(true)
@@ -86,32 +87,18 @@ class FirebaseDataAdapter {
     
     // MARK: - Profile Methods
     func userSignIn(_ email: String, password: String, completionBlock: AuthBlock? ) {
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-            completionBlock!(user, error as NSError?)
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+            completionBlock!(user, error as NSError!)
         })
     }
     
-    func retriveTodosFromDB(onDemand: @escaping ListStreamBlock)  -> FIRDatabaseHandle?  {
-        guard let userID = FIRAuth.auth()?.currentUser?.uid else {
-            return nil
-        }
-            let refPath = firebaseRef.child("Users").child("\(userID)/todo/")
-            return refPath.observe(.childAdded, with: onDemand)
-    }
-    
-    //FIXME: should refactor this method
-    func getTodoList(onDemand: @escaping ListStreamBlock) -> FIRDatabaseHandle? {
-        if let userID = FIRAuth.auth()?.currentUser?.uid {
+    // MARK: Fetching data for the current user from Firebase and pass it with onDemand block
+    @discardableResult func getTodoList(onDemand: @escaping ListStreamBlock) -> DatabaseHandle? {
+        if let userID = Auth.auth().currentUser?.uid {
             let chatRef = self.firebaseRef.child("Users").child("\(userID)/todo/")
             let messagesQuery = chatRef.queryLimited(toLast: 25)
             return messagesQuery.observe(.childAdded, with: onDemand)
         }
         return nil
     }
-    
-    
-    
-    
-    
-    
 }

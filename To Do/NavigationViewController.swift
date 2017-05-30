@@ -12,7 +12,7 @@ import Firebase
 
 class NavigationViewController: UINavigationController {
 
-    let database = FIRDatabase()
+    let database = Database()
 //    private let zoomNavigationControllerDelegate = ZoomNavigationControllerDelegate()
     
 //    required init?(coder aDecoder: NSCoder) {
@@ -23,14 +23,14 @@ class NavigationViewController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if FIRAuth.auth()?.currentUser?.uid == nil {
+        if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
     }
     
     func handleLogout() {
         do {
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
         } catch let logoutError {
             print(logoutError)
         }
