@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     override init() {
         super.init()
-        FIRApp.configure()
+        FirebaseApp.configure()
         // not really needed unless you really need it FIRDatabase.database().persistenceEnabled = true
     }
 
