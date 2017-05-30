@@ -38,9 +38,11 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         self.changeNames()
-        if FIRAuth.auth()?.currentUser?.uid != nil {
+        if Auth.auth().currentUser?.uid != nil {
             let vc = UIStoryboard(name:"ListItemsView", bundle:nil).instantiateViewController(withIdentifier: "listItem") as? ListItemTableViewController
             self.navigationController?.pushViewController(vc!, animated:true)
+//            let vc = UIStoryboard(name:"MainTest", bundle:nil).instantiateViewController(withIdentifier: "MainTableViewController") as? MainTableViewController
+//            self.navigationController?.pushViewController(vc!, animated:true)
         }
     }
     
@@ -94,6 +96,9 @@ class InitialViewController: UIViewController {
                 let vc = UIStoryboard(name:"ListItemsView", bundle:nil).instantiateViewController(withIdentifier: "listItem") as? ListItemTableViewController
                 //vc.resultsArray = self.resultsArray
                 self.navigationController?.pushViewController(vc!, animated:true)
+//                let vc = UIStoryboard(name:"MainTest", bundle:nil).instantiateViewController(withIdentifier: "MainTableViewController") as? MainTableViewController
+//                //vc.resultsArray = self.resultsArray
+//                self.navigationController?.pushViewController(vc!, animated:true)
                 
             })
         } else {
@@ -116,6 +121,9 @@ class InitialViewController: UIViewController {
                     return
                 }
                 print("your account is all signed in")
+//                let vc = UIStoryboard(name:"MainTest", bundle:nil).instantiateViewController(withIdentifier: "MainTableViewController") as? MainTableViewController
+//                //vc.resultsArray = self.resultsArray
+//                self.navigationController?.pushViewController(vc!, animated:true)
                 let vc = UIStoryboard(name:"ListItemsView", bundle:nil).instantiateViewController(withIdentifier: "listItem") as? ListItemTableViewController
                 //vc.resultsArray = self.resultsArray
                 self.navigationController?.pushViewController(vc!, animated:true)
