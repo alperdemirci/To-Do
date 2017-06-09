@@ -101,4 +101,22 @@ class FirebaseDataAdapter {
         }
         return nil
     }
+
+    func saveSnapshotMapViewForTableCells() {
+        // TODO:
+        
+    }
+    
+    func retriveSnapshotMapView() {
+        // TODO:
+    }
+    
 }
+
+
+
+
+
+
+
+
