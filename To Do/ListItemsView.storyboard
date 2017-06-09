@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -49,7 +49,7 @@
                                                         <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="sharedButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="9md-YT-icx"/>
+                                                        <action selector="ButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="7Dq-YJ-5ln"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen" translatesAutoresizingMaskIntoConstraints="NO" id="RtL-Ql-hbN">
@@ -65,14 +65,14 @@
                                                     </constraints>
                                                     <state key="normal" title="I am done"/>
                                                     <connections>
-                                                        <action selector="doneButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="0qC-fJ-Ynl"/>
+                                                        <action selector="ButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="zQK-fK-fkx"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgZ-ns-ibr">
                                                     <rect key="frame" x="214" y="221" width="121" height="30"/>
                                                     <state key="normal" title="Edit"/>
                                                     <connections>
-                                                        <action selector="editButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="ZD2-Bf-Co6"/>
+                                                        <action selector="ButtonPressed:" destination="3oO-HO-pw2" eventType="touchUpInside" id="ar5-KE-Nnu"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

@@ -8,8 +8,14 @@
 
 import UIKit
 
+enum dataMode {
+    case dataEdit
+    case dataNew
+}
+
 class AddNewItemViewController: UIViewController {
     var database = FirebaseDataAdapter()
+    var addMapView = MapViewController()
     // MARK: Outlets
     @IBOutlet weak var shareEmailTextField: UITextField!
     @IBOutlet weak var sharedContinueSwitch: UISwitch!
@@ -24,6 +30,11 @@ class AddNewItemViewController: UIViewController {
     @IBOutlet weak var addLocationSwitch: UISwitch!
     
     @IBOutlet weak var locationSnapshotImageHeightConstraint: NSLayoutConstraint!
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.errorMessage.isHidden = true
@@ -60,6 +71,7 @@ class AddNewItemViewController: UIViewController {
     @IBAction func addLocationChanged(_ sender: Any) {
         if self.addLocationSwitch.isOn == true {
             let vc = UIStoryboard(name:"MapView", bundle:nil).instantiateViewController(withIdentifier: "mapView") as? MapViewController
+            self.addMapView.callingViewController(.callingFromAddNewItemViewController)
             //vc.resultsArray = self.resultsArray
             self.navigationController?.pushViewController(vc!, animated:true)
             self.locationSnapshotImageHeightConstraint.constant = self.datePickerSwitch.isOn == false ? 0 : 335
@@ -132,6 +144,27 @@ class AddNewItemViewController: UIViewController {
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         self.scrollView.contentInset = contentInset
+
+    }
+    
+    func callingViewController(_ toNew: dataMode)  {
+        switch toNew {
+        case .dataNew:
+            break
+            //new settings will not change
+        case .dataEdit:
+            break
+            //fetch user data from DB
+        }
     }
 }
+
+
+
+
+
+
+
+
+
 

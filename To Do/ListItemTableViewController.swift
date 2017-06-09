@@ -13,17 +13,15 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     var isbuttonPressed: Bool = false
-//    var height = 50
     var didselect: Int!
     var contentHeights : [CGFloat] = [0.0, 0.0]
-
+    var addNewItemView = AddNewItemViewController()
+    
     //MARK:
     let database = FirebaseDataAdapter()
     var addNavBarButton: UIButton!
     var todoListsArray = [Users]()
     
-//    @IBOutlet weak var uiimage: UIImageView!
-//    @IBOutlet weak var uiimageHeightContstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
@@ -31,7 +29,7 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         self.fetchTodoList()
         
         
-//        self.uiimageHeightContstraint.constant = 0
+        //        self.uiimageHeightContstraint.constant = 0
         
         Auth.auth().addStateDidChangeListener() { (auth, user) in
             if user != nil {
@@ -50,8 +48,8 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         navItem.rightBarButtonItem = doneItem
         self.navigationItem.setRightBarButton(doneItem, animated: true)
     }
-
-
+    
+    
     // MARK: Table View
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.todoListsArray.count
@@ -86,7 +84,6 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if self.didselect != nil && indexPath.row == self.didselect {
             contentHeights = [250.0]
             return 250
@@ -96,34 +93,23 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        if (contentHeights[webView.tag] != 0.0)
-        {
-            // height knowed, no need to reload cell
-            return
+    func ButtonPressed(_ userAccept: UIButton, tableViewCell: ListItemTableViewCell) {
+        let buttonName = userAccept.titleLabel?.text
+        switch buttonName! {
+        case  "Edit":
+            let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
+            self.addNewItemView.callingViewController(.dataEdit)
+            self.navigationController?.pushViewController(vc!, animated:true)
+        case "I am done":
+            //TODO: DB call to save the new data back to DB
+            break
+        default:
+            break
         }
-        contentHeights[webView.tag] = webView.scrollView.contentSize.height
-//        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: webView.tag, inSection: 0)], withRowAnimation: .Automatic)
-        tableView.reloadRows(at: [IndexPath(row: webView.tag, section: 0)], with: .automatic)
-    
-    }
-    
-    // MARK: Button Delegate method
-    func sharedButtonPressed(_ userAccept: UIButton, tableViewCell: ListItemTableViewCell) {
-//        print("sharedButton Pressed")
-    }
-    
-    func doneButtonPressed(_ userAccept: UIButton, tableViewCell: ListItemTableViewCell) {
-        print("done button pressed")
-    }
-    
-    func editButtonPressed(_ userAccept: UIButton, tableViewCell: ListItemTableViewCell) {
-        print("edit button pressed")
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         print("didselect", indexPath.row)
         if self.didselect == nil || self.didselect != indexPath.row {
             self.didselect = indexPath.row
@@ -132,9 +118,9 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
+        //        DispatchQueue.main.async {
+        //            self.tableView.reloadData()
+        //        }
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
@@ -142,7 +128,7 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func addNewTodo() {
         let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
-        //vc.resultsArray = self.resultsArray
+        self.addNewItemView.callingViewController(.dataNew)
         self.navigationController?.pushViewController(vc!, animated:true)
         
     }
