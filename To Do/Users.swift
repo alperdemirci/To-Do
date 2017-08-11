@@ -13,4 +13,5 @@ class Users: NSObject {
     var timestamp: String?
     var value: String?
     var timestampfuture: String?
+    var timestampcurrent: String?
 }

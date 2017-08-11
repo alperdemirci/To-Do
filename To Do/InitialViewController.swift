@@ -131,7 +131,7 @@ class InitialViewController: UIViewController {
         }
     }
     func changeNames() {
-        if self.isSignIn{
+        if self.isSignIn {
             signinButton.setTitle("Sign In", for: .normal)
             self.userNameTextField.isHidden = true
             self.emailTFConstraintsToPicker.constant = 15
