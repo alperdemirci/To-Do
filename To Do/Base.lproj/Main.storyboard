@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Initial View Controller-->
+        <!--Login Registration View Controller-->
         <scene sceneID="0kG-S8-Me3">
             <objects>
-                <viewController id="eX4-7W-Ov6" customClass="InitialViewController" customModule="To_Do" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eX4-7W-Ov6" customClass="LoginRegistrationViewController" customModule="To_Do" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WbB-HQ-7kH"/>
                         <viewControllerLayoutGuide type="bottom" id="Jjt-5Y-sLK"/>

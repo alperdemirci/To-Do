@@ -21,7 +21,7 @@
 		4EE6F02E1EC4F4C10014F20F /* To_DoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F02D1EC4F4C10014F20F /* To_DoTests.swift */; };
 		4EE6F0391EC4F4C10014F20F /* To_DoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F0381EC4F4C10014F20F /* To_DoUITests.swift */; };
 		4EE6F0471EC4F6670014F20F /* AddNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F0461EC4F6670014F20F /* AddNewItemViewController.swift */; };
-		4EE6F0491EC4FD8E0014F20F /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F0481EC4FD8E0014F20F /* InitialViewController.swift */; };
+		4EE6F0491EC4FD8E0014F20F /* LoginRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F0481EC4FD8E0014F20F /* LoginRegistrationViewController.swift */; };
 		4EE6F04B1EC4FFFC0014F20F /* AddNewItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE6F04A1EC4FFFC0014F20F /* AddNewItem.storyboard */; };
 		4EE6F04D1EC502F50014F20F /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6F04C1EC502F50014F20F /* ListItemTableViewCell.swift */; };
 		4EE6F0531EC514420014F20F /* ListItemsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE6F0521EC514420014F20F /* ListItemsView.storyboard */; };
@@ -71,7 +71,7 @@
 		4EE6F0381EC4F4C10014F20F /* To_DoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = To_DoUITests.swift; sourceTree = "<group>"; };
 		4EE6F03A1EC4F4C10014F20F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EE6F0461EC4F6670014F20F /* AddNewItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewItemViewController.swift; sourceTree = "<group>"; };
-		4EE6F0481EC4FD8E0014F20F /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		4EE6F0481EC4FD8E0014F20F /* LoginRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewController.swift; sourceTree = "<group>"; };
 		4EE6F04A1EC4FFFC0014F20F /* AddNewItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddNewItem.storyboard; sourceTree = "<group>"; };
 		4EE6F04C1EC502F50014F20F /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
 		4EE6F0521EC514420014F20F /* ListItemsView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListItemsView.storyboard; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 			children = (
 				4EE6F0181EC4F4C10014F20F /* AppDelegate.swift */,
 				4E173F781ECB979700345D06 /* Model */,
-				4EE6F0481EC4FD8E0014F20F /* InitialViewController.swift */,
+				4EE6F0481EC4FD8E0014F20F /* LoginRegistrationViewController.swift */,
 				4EE6F01C1EC4F4C10014F20F /* Main.storyboard */,
 				4EAA90111ED35AC800A769CB /* MapView */,
 				4EE6F04E1EC503D40014F20F /* ListItems */,
@@ -527,7 +527,7 @@
 				4E2EF6541ECB7C9A0067782E /* Users.swift in Sources */,
 				4EE6F0471EC4F6670014F20F /* AddNewItemViewController.swift in Sources */,
 				4EE6F05B1EC61CB40014F20F /* FirebaseDataAdapter.swift in Sources */,
-				4EE6F0491EC4FD8E0014F20F /* InitialViewController.swift in Sources */,
+				4EE6F0491EC4FD8E0014F20F /* LoginRegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

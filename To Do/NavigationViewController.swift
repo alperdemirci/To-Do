@@ -11,18 +11,10 @@ import Firebase
 //import ZoomTransitioning
 
 class NavigationViewController: UINavigationController {
-
-    let database = Database()
-//    private let zoomNavigationControllerDelegate = ZoomNavigationControllerDelegate()
-    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        
-//        delegate = zoomNavigationControllerDelegate
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.handleLogout()
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         }
@@ -34,7 +26,6 @@ class NavigationViewController: UINavigationController {
         } catch let logoutError {
             print(logoutError)
         }
-        let initialViewController = InitialViewController()
-        present(initialViewController, animated: true, completion: nil)
+
     }
 }
