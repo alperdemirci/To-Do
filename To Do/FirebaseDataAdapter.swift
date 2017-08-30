@@ -75,21 +75,9 @@ class FirebaseDataAdapter {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
-        let valueWithTimestamp = ["value":value,
-                                  "sharedEmail":sharedEmail,
-                                "timestampcurrent":Date.ISOStringFromDate(date),
-                                "timestampfuture":"",
-                                "uniqueID": uuid]
-        refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
-            if error != nil {
-                print(error ?? "error")
-            } else {
-                print(ref)
-                onAddCompletionBlock(true)
-            }
-        }
+        var locationAdded = "false"
         if image != nil {
+            locationAdded = "true"
             guard let userID = Auth.auth().currentUser?.uid else {
                 return
             }
@@ -102,6 +90,21 @@ class FirebaseDataAdapter {
                         print(metadata ?? " ")
                     }
                 })
+            }
+        }
+        let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
+        let valueWithTimestamp = ["value":value,
+                                  "sharedEmail":sharedEmail,
+                                "timestampcurrent":Date.ISOStringFromDate(date),
+                                "timestampfuture":"",
+                                "uniqueID": uuid,
+                                "locationAdded": locationAdded] as [String : Any]
+        refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
+            if error != nil {
+                print(error ?? "error")
+            } else {
+                print(ref)
+                onAddCompletionBlock(true)
             }
         }
     }

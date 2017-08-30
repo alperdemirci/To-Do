@@ -15,4 +15,5 @@ class Users: NSObject {
     var timestampfuture: String?
     var timestampcurrent: String?
     var uniqueID: String?
+    var locationAdded: String?
 }

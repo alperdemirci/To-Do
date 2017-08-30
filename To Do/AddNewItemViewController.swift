@@ -19,6 +19,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     // MARK: Outlets
     
     var screenshot: UIImage?
+    var currentCellDataToBeEdited: Users?
     
     @IBOutlet weak var shareEmailTextField: UITextField!
     @IBOutlet weak var sharedContinueSwitch: UISwitch!
@@ -36,10 +37,12 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.errorMessage.isHidden = true
         self.sharedContinueSwitch.isOn = false
         self.datePickerSwitch.isOn = false
         self.addLocationSwitch.isOn = false
+
+        self.modeChecker()
+        self.errorMessage.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
         
         // calls the keyboard show and keyboard height methods
@@ -47,8 +50,8 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         //height adjustment for animation show/hide
-        self.sharedEmailTextFieldHeightContsraint.constant = 0
-        self.datePickerHeightConstraint.constant = 0
+//        self.sharedEmailTextFieldHeightContsraint.constant = 0
+//        self.datePickerHeightConstraint.constant = 0
         self.locationSnapshotImageHeightConstraint.constant = 0
     }
     
@@ -79,6 +82,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     }
     
     @IBAction func DateValueChanged(_ sender: Any) {
+        //TODO: push the date to db
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM dd, YYYY" //"MM dd, YYYY hh:mm a" //
         formatter.dateStyle = .full
@@ -154,11 +158,44 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     func callingViewController(_ toNew: dataMode)  {
         switch toNew {
         case .dataNew:
+            print("Data New")
             break
             //new settings will not change
         case .dataEdit:
+            print("Data Edit", self.currentCellDataToBeEdited ?? " ")
+            
             break
             //fetch user data from DB
+        }
+    }
+    
+    func modeChecker() {
+        self.currentCellDataToBeEdited?.locationAdded == "true" ? addLocationSwitch.setOn(true, animated: true) : addLocationSwitch.setOn(false, animated: true)
+        
+        self.currentCellDataToBeEdited?.sharedEmail != "" ? (self.sharedContinueSwitch.isOn = true) : (self.sharedContinueSwitch.isOn = false)
+        
+//        self.currentCellDataToBeEdited?.sharedEmail != "" ? (self.sharedEmailTextFieldHeightContsraint.constant = 60) : (self.sharedEmailTextFieldHeightContsraint.constant = 0)
+        
+        
+        self.sharedEmailTextFieldHeightContsraint.constant = self.sharedContinueSwitch.isOn == false ? 0 : 60
+        
+        self.datePickerHeightConstraint.constant = self.currentCellDataToBeEdited?.timestamp == nil ? 0 : 169
+        
+
+        self.shareEmailTextField.text = self.currentCellDataToBeEdited?.sharedEmail
+        
+        self.currentCellDataToBeEdited?.timestamp != nil ? self.datePickerSwitch.setOn(true, animated: true) : self.datePickerSwitch.setOn(false, animated: true)
+        
+        //TODO: datepicker show real date from db
+        //self.datePicker.date = self.currentCellDataToBeEdited?.timestamp
+        
+        self.currentCellDataToBeEdited?.value != nil ? (self.todoTextField.text = self.currentCellDataToBeEdited?.value) : (self.todoTextField.text = nil)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+        if self.currentCellDataToBeEdited != nil {
+            print(self.currentCellDataToBeEdited ?? "Nothing ")
         }
     }
 }

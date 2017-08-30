@@ -17,10 +17,12 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     var contentHeights : [CGFloat] = [0.0, 0.0]
     var addNewItemView = AddNewItemViewController()
     
+    
     //MARK:
     let database = FirebaseDataAdapter()
     var addNavBarButton: UIButton!
     var todoListsArray = [Users]()
+    var currentCellDataToBeEdited: Users?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +68,9 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
         if user.sharedEmail != nil {
-            cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
-            cell.sharedButton.isHidden = false
+//            cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
+            cell.sharedWithLabel.text = user.sharedEmail!
+            cell.sharedButton.isHidden = true
             cell.sharedButton.isEnabled = true
         }
         cell.delegate = self
@@ -105,7 +108,9 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         switch buttonName {
         case  "Edit":
+            print("case edit clicked from listITemTable")
             let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
+            vc?.currentCellDataToBeEdited = self.currentCellDataToBeEdited
             self.addNewItemView.callingViewController(.dataEdit)
             self.navigationController?.pushViewController(vc!, animated:true)
         case "I am done":
@@ -119,11 +124,13 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didselect", indexPath.row)
+        self.currentCellDataToBeEdited = self.todoListsArray[indexPath.row]
         if self.didselect == nil || self.didselect != indexPath.row {
             self.didselect = indexPath.row
         } else {
             self.didselect = nil
         }
+        
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
         //        DispatchQueue.main.async {
