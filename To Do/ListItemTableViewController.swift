@@ -60,10 +60,11 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         //UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "itemListCell")
         let user = self.todoListsArray[indexPath.row]
         cell.todoLabel.text = user.value
-        self.database.retriveScreenshotOfMapview(uuid: user.uniqueID) { (image) in
-            cell.uiimage.image = image
+        DispatchQueue.main.async {
+            self.database.retriveScreenshotOfMapview(uuid: user.uniqueID) { (image) in
+                cell.uiimage.image = image
+            }
         }
-        
         if user.sharedEmail != nil {
             cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
             cell.sharedButton.isHidden = false
