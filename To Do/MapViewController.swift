@@ -17,6 +17,8 @@ enum mapViewMode: UInt {
 
 class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate {
     
+    let database = FirebaseDataAdapter()
+    
     var searchController:UISearchController!
     var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
@@ -28,14 +30,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
     var locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
-    
-//        var  test = mapViewMode.callingFromAddNewItemViewController {
-//            didSet {
-//                callingViewController(self.test)
-//            }
-//        }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -43,7 +38,6 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
-        
     }
     
     func callingViewController(_ toNewMode: mapViewMode) {
@@ -117,32 +111,22 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
         self.mapView.setRegion(region, animated: true)
     }
     
+    //MARK: screenshot
+    func screenShotMethod() {
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.database.saveSnapshotMapForImageStorage(image: screenshot!)
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         print("view will disappear")
-       //screenShotRenderer.image = viewForScreenShot.screenShot
-// TODO: get the image and send the image back to firebase, set up the firebase for image save and retrive methods
+        self.screenShotMethod()
         super.viewWillDisappear(true)
     }
 }
-
-extension UIView {
-    var screenShot: UIImage?  {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 1.0);
-        if let _ = UIGraphicsGetCurrentContext() {
-            drawHierarchy(in: bounds, afterScreenUpdates: true)
-            let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return screenshot
-        }
-        return nil
-    }
-}
-
-
-
-
-
-
-
-
 

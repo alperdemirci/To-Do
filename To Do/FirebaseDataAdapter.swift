@@ -101,11 +101,23 @@ class FirebaseDataAdapter {
         }
         return nil
     }
-
-    func saveSnapshotMapViewForTableCells() {
-        // TODO:
-        
+    
+    // this function saves the map screenshot to the user
+    func saveSnapshotMapForImageStorage(image: UIImage) {
+        if let userID = Auth.auth().currentUser?.uid {
+            let storageRef = Storage.storage().reference().child("\(userID)/myimage.png")
+            if let uploadData = UIImagePNGRepresentation(image) {
+                storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                    if error != nil {
+                        print(error ?? "something happend while uploading the image to the DB")
+                    } else {
+                        print(metadata ?? " ")
+                    }
+                })
+            }
+        }
     }
+
     
     func retriveSnapshotMapView() {
         // TODO:
