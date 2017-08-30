@@ -147,6 +147,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jNU-sc-j9A"/>
                     <connections>
+                        <outlet property="ValidationStackView" destination="mHD-DK-p91" id="bau-qr-xKi"/>
                         <outlet property="alphabetValidationCheck" destination="Jig-vx-XY1" id="2mR-lm-FKb"/>
                         <outlet property="emailErrorMessages" destination="C0T-50-LHp" id="wek-gd-8Eu"/>
                         <outlet property="emailTFConstraintsToPicker" destination="eaP-Eg-XqT" id="yim-O1-eMn"/>

@@ -26,6 +26,7 @@ class LoginRegistrationViewController: UIViewController {
     @IBOutlet weak var lengthValidationCheck: UILabel!
     @IBOutlet weak var specialCharValidationCheck: UILabel!
     @IBOutlet weak var passwordErrorMessages: UILabel!
+    @IBOutlet weak var ValidationStackView: UIStackView!
     @IBOutlet weak var emailErrorMessages: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -134,10 +135,12 @@ class LoginRegistrationViewController: UIViewController {
         if self.isSignIn {
             signinButton.setTitle("Sign In", for: .normal)
             self.userNameTextField.isHidden = true
+            self.ValidationStackView.isHidden = true
             self.emailTFConstraintsToPicker.constant = 15
         } else {
             signinButton.setTitle("Register", for: .normal)
             self.userNameTextField.isHidden = false
+            self.ValidationStackView.isHidden = false
             self.emailTFConstraintsToPicker.constant = self.tempConstraints
         }
     }
