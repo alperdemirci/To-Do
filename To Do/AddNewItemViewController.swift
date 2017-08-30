@@ -13,10 +13,13 @@ enum dataMode {
     case dataNew
 }
 
-class AddNewItemViewController: UIViewController {
+class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     var database = FirebaseDataAdapter()
     var addMapView = MapViewController()
     // MARK: Outlets
+    
+    var screenshot: UIImage?
+    
     @IBOutlet weak var shareEmailTextField: UITextField!
     @IBOutlet weak var sharedContinueSwitch: UISwitch!
     @IBOutlet weak var sharedEmailTextFieldHeightContsraint: NSLayoutConstraint!
@@ -30,10 +33,6 @@ class AddNewItemViewController: UIViewController {
     @IBOutlet weak var addLocationSwitch: UISwitch!
     
     @IBOutlet weak var locationSnapshotImageHeightConstraint: NSLayoutConstraint!
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +72,7 @@ class AddNewItemViewController: UIViewController {
             let vc = UIStoryboard(name:"MapView", bundle:nil).instantiateViewController(withIdentifier: "mapView") as? MapViewController
             self.addMapView.callingViewController(.callingFromAddNewItemViewController)
             //vc.resultsArray = self.resultsArray
+            vc!.delegate = self
             self.navigationController?.pushViewController(vc!, animated:true)
             self.locationSnapshotImageHeightConstraint.constant = self.datePickerSwitch.isOn == false ? 0 : 335
         }
@@ -107,6 +107,9 @@ class AddNewItemViewController: UIViewController {
 
     }
     
+    func screenshotImage(image: UIImage) {
+        self.screenshot = image
+    }
     
     @IBAction func newTodoAdded(_ sender: Any) {
         if self.todoTextField.text != "" {
@@ -120,7 +123,8 @@ class AddNewItemViewController: UIViewController {
             self.sharedContinueSwitchChanged((Any).self)
             //TODO: ask user if the are sure not to share this todo with a user
         }
-        self.database.writeTodoIntoDB(value: self.todoTextField.text!, date: currentDateTime, sharedEmail: self.shareEmailTextField.text ?? "" ) { (check) in
+        
+        self.database.writeTodoIntoDB(image: self.screenshot, value: self.todoTextField.text!, date: currentDateTime, sharedEmail: self.shareEmailTextField.text ?? "" ) { (check) in
             if check {
                 // TODO: all good
             } else {

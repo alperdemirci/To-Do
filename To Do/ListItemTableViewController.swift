@@ -60,6 +60,9 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         //UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "itemListCell")
         let user = self.todoListsArray[indexPath.row]
         cell.todoLabel.text = user.value
+        self.database.retriveScreenshotOfMapview(uuid: user.uniqueID) { (image) in
+            cell.uiimage.image = image
+        }
         
         if user.sharedEmail != nil {
             cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
@@ -93,9 +96,13 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    
+    //MARK: Button action
     func ButtonPressed(_ userAccept: UIButton, tableViewCell: ListItemTableViewCell) {
-        let buttonName = userAccept.titleLabel?.text
-        switch buttonName! {
+        guard let buttonName = userAccept.titleLabel?.text else {
+            return
+        }
+        switch buttonName {
         case  "Edit":
             let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
             self.addNewItemView.callingViewController(.dataEdit)

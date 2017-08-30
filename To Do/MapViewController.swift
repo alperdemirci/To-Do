@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol ScreenshotProtocol {
+    func screenshotImage(image: UIImage)
+}
+
 enum mapViewMode: UInt {
     case callingFromListItemViewController
     case callingFromAddNewItemViewController
@@ -18,6 +22,7 @@ enum mapViewMode: UInt {
 class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate {
     
     let database = FirebaseDataAdapter()
+    var delegate: ScreenshotProtocol?
     
     var searchController:UISearchController!
     var annotation:MKAnnotation!
@@ -118,9 +123,12 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
         
         layer.render(in: UIGraphicsGetCurrentContext()!)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        guard let screenshot = UIGraphicsGetImageFromCurrentImageContext() else {
+            return
+        }
         UIGraphicsEndImageContext()
-        self.database.saveSnapshotMapForImageStorage(image: screenshot!)
+        //pass the image via protocol to addViewController
+        delegate?.screenshotImage(image: screenshot)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

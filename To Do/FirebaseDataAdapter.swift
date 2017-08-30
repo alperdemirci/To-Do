@@ -24,6 +24,9 @@ enum AuthProvider {
     case authTwitter
     case authCustom
 }
+enum todoImage {
+    case image
+}
 
 class FirebaseDataAdapter {
     var firebaseRef: DatabaseReference
@@ -67,20 +70,38 @@ class FirebaseDataAdapter {
         })
     }
     
-    func writeTodoIntoDB(value: String,date: Date ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
-        if let userID = Auth.auth().currentUser?.uid {
-            let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
-            let valueWithTimestamp = ["value":value,
-                                      "sharedEmail":sharedEmail,
-                                    "timestampcurrent":Date.ISOStringFromDate(date),
-                                    "timestampfuture":""]
-            refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
-                if error != nil {
-                    print(error ?? "error")
-                } else {
-                    print(ref)
-                    onAddCompletionBlock(true)
-                }
+    func writeTodoIntoDB(image: UIImage?, value: String,date: Date ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
+        let uuid = UUID().uuidString
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
+        let valueWithTimestamp = ["value":value,
+                                  "sharedEmail":sharedEmail,
+                                "timestampcurrent":Date.ISOStringFromDate(date),
+                                "timestampfuture":"",
+                                "uniqueID": uuid]
+        refPath.setValue(valueWithTimestamp) { (error, ref) -> Void in
+            if error != nil {
+                print(error ?? "error")
+            } else {
+                print(ref)
+                onAddCompletionBlock(true)
+            }
+        }
+        if image != nil {
+            guard let userID = Auth.auth().currentUser?.uid else {
+                return
+            }
+            let storageRef = Storage.storage().reference().child("\(userID)/\(uuid).png")
+            if let uploadData = UIImagePNGRepresentation(image!) {
+                storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                    if error != nil {
+                        print(error ?? "something happend while uploading the image to the DB")
+                    } else {
+                        print(metadata ?? " ")
+                    }
+                })
             }
         }
     }
@@ -102,25 +123,40 @@ class FirebaseDataAdapter {
         return nil
     }
     
-    // this function saves the map screenshot to the user
-    func saveSnapshotMapForImageStorage(image: UIImage) {
-        if let userID = Auth.auth().currentUser?.uid {
-            let storageRef = Storage.storage().reference().child("\(userID)/myimage.png")
-            if let uploadData = UIImagePNGRepresentation(image) {
-                storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-                    if error != nil {
-                        print(error ?? "something happend while uploading the image to the DB")
-                    } else {
-                        print(metadata ?? " ")
-                    }
-                })
+    // MARK: Image/Screenshot handler
+//    func saveSnapshotMapForImageStorage(image: UIImage, uuid: String?) {
+//        guard let userID = Auth.auth().currentUser?.uid else {
+//            return
+//        }
+//        let storageRef = Storage.storage().reference().child("\(userID)/myimage.png")
+//        if let uploadData = UIImagePNGRepresentation(image) {
+//            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+//                if error != nil {
+//                    print(error ?? "something happend while uploading the image to the DB")
+//                } else {
+//                    print(metadata ?? " ")
+//                }
+//            })
+//        }
+//        
+//    }
+
+    func retriveScreenshotOfMapview(uuid: String?, onDownloadCompletionBlock: @escaping (_ completed: UIImage) -> ()) {
+        guard let uniqueID = uuid else {
+            return
+        }
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let islandRef = Storage.storage().reference().child("\(userID)/\(uniqueID).png")
+        islandRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error)
+            } else {
+                let image = UIImage(data: data!)
+                onDownloadCompletionBlock(image!)
             }
         }
-    }
-
-    
-    func retriveSnapshotMapView() {
-        // TODO:
     }
     
 }
