@@ -117,6 +117,7 @@
                                         <connections>
                                             <outlet property="sharedButton" destination="YKq-IN-Mt4" id="H0W-df-oI9"/>
                                             <outlet property="sharedEmailChange" destination="YKq-IN-Mt4" id="62T-i6-VRx"/>
+                                            <outlet property="sharedWith" destination="tpC-lK-RAC" id="pkG-RU-gVd"/>
                                             <outlet property="sharedWithLabel" destination="H2q-ci-yD0" id="Sr5-QC-SQo"/>
                                             <outlet property="todoLabel" destination="4iF-Rc-hed" id="gz7-mL-ofF"/>
                                             <outlet property="uiimage" destination="RtL-Ql-hbN" id="7bu-bH-CFE"/>

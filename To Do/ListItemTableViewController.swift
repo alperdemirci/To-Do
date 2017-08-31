@@ -69,6 +69,8 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         if user.sharedEmail != nil {
 //            cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
+            user.sharedEmail == "" ? (cell.sharedWithLabel.isHidden = true) : (cell.sharedWithLabel.isHidden = false)
+            user.sharedEmail == "" ? (cell.sharedWith.isHidden = true) : (cell.sharedWith.isHidden = false)
             cell.sharedWithLabel.text = user.sharedEmail!
             cell.sharedButton.isHidden = true
             cell.sharedButton.isEnabled = true

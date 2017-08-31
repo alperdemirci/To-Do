@@ -16,6 +16,7 @@ class ListItemTableViewCell: UITableViewCell {
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var sharedLabel: UILabel!
     @IBOutlet weak var sharedButton: UIButton!
+    @IBOutlet weak var sharedWith: UILabel!
     @IBOutlet weak var sharedWithLabel: UILabel!
     @IBOutlet weak var uiimage: UIImageView!
     @IBOutlet weak var uimageConstraint: NSLayoutConstraint!
