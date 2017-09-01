@@ -70,7 +70,7 @@ class FirebaseDataAdapter {
         })
     }
     
-    func writeTodoIntoDB(image: UIImage?, value: String,date: Date ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
+    func writeTodoIntoDB(image: UIImage?, value: String, date: String ,sharedEmail: String ,onAddCompletionBlock: @escaping (_ completed: Bool) -> ()) {
         let uuid = UUID().uuidString
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -95,7 +95,7 @@ class FirebaseDataAdapter {
         let refPath = firebaseRef.child("Users").child("\(userID)/todo/").childByAutoId()
         let valueWithTimestamp = ["value":value,
                                   "sharedEmail":sharedEmail,
-                                "timestampcurrent":Date.ISOStringFromDate(date),
+                                "timestampcurrent": date,  //Date.dateFromISOString(date),
                                 "timestampfuture":"",
                                 "uniqueID": uuid,
                                 "locationAdded": locationAdded] as [String : Any]
