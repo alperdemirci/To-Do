@@ -67,14 +67,13 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
                 cell.uiimage.image = image
             }
         }
-        if user.sharedEmail != nil {
-//            cell.sharedButton.setTitle(user.sharedEmail!,for: .normal)
-            user.sharedEmail == "" ? (cell.sharedWithLabel.isHidden = true) : (cell.sharedWithLabel.isHidden = false)
-            user.sharedEmail == "" ? (cell.sharedWith.isHidden = true) : (cell.sharedWith.isHidden = false)
-            cell.sharedWithLabel.text = user.sharedEmail!
-            cell.sharedButton.isHidden = true
-            cell.sharedButton.isEnabled = true
-        }
+//        if user.sharedEmail != nil {
+        user.sharedEmail == "" ? (cell.sharedWithLabel.isHidden = true) : (cell.sharedWithLabel.isHidden = false)
+        user.sharedEmail == "" ? (cell.sharedWith.isHidden = true) : (cell.sharedWith.isHidden = false)
+        cell.sharedWithLabel.text = user.sharedEmail!
+        cell.sharedButton.isHidden = true
+        cell.sharedButton.isEnabled = true
+//        }
         cell.delegate = self
         return cell
     }
@@ -93,9 +92,24 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        var imageExist: Bool = false
+//        let cell = self.tableView.dequeueReusableCell(withIdentifier: "itemListCell") as? ListItemTableViewCell ?? ListItemTableViewCell(style: .default, reuseIdentifier: "itemListCell")
+//        if cell.imageView?.image != nil {
+//                imageExist = true
+//        }
+//        let user = self.todoListsArray[indexPath.row]
+//
+//        if user.locationAdded == "false" {
+//            print("false")
+//        }
         if self.didselect != nil && indexPath.row == self.didselect {
             contentHeights = [250.0]
-            return 250
+            if self.todoListsArray[indexPath.row].locationAdded == "true" {
+                return 250
+            } else {
+//                cell.uiImageViewHeightConstraint.constant = 0
+                return 250
+            }
         } else {
             contentHeights = [65.0]
             return 65
