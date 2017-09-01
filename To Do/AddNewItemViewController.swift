@@ -19,6 +19,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     // MARK: Outlets
     
     var modeCheck: String = ""
+    var timeAndDate: String = ""
     
     var screenshot: UIImage?
     var currentCellDataToBeEdited: Users?
@@ -86,31 +87,9 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     @IBAction func DateValueChanged(_ sender: Any) {
         //TODO: push the date to db
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd, YYYY" //"MM dd, YYYY hh:mm a" //
-        formatter.dateStyle = .full
-        let strDate = formatter.string(from: datePicker.date)
-        print(strDate)
-        
-        
-        datePicker.datePickerMode = .date
-        let selectedDate = datePicker.date
-        print(selectedDate)
-        
-     
-        let myDatePicker = datePicker
-        myDatePicker?.datePickerMode = .date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd YYYY"
-        let date = dateFormatter.string(from: (myDatePicker?.date)!)
-        print(date)
-        
-        let myDatePicker2 = datePicker
-        myDatePicker2?.datePickerMode = .date
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "hh:mm a"
-        let time = dateFormatter2.string(from: (myDatePicker2?.date)!)
-        print(time)
-
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let timeString = datePicker.date.iso8601
+        self.timeAndDate = timeString
     }
     
     func screenshotImage(image: UIImage) {
@@ -123,14 +102,14 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
             self.errorMessage.isHidden = false
             self.navigationController?.popViewController(animated: true)
         }
-        let currentDateTime = Date()
+//        let currentDateTime = Date()
         if self.sharedContinueSwitch.isOn==true && self.shareEmailTextField.text=="" {
             self.sharedContinueSwitch.isOn = false
             self.sharedContinueSwitchChanged((Any).self)
             //TODO: ask user if the are sure not to share this todo with a user
         }
         
-        self.database.writeTodoIntoDB(image: self.screenshot, value: self.todoTextField.text!, date: currentDateTime, sharedEmail: self.shareEmailTextField.text ?? "" ) { (check) in
+        self.database.writeTodoIntoDB(image: self.screenshot, value: self.todoTextField.text!, date: self.timeAndDate, sharedEmail: self.shareEmailTextField.text ?? "" ) { (check) in
             if check {
                 // TODO: all good
             } else {
@@ -184,6 +163,10 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
             self.currentCellDataToBeEdited?.sharedEmail != "" ? (self.sharedContinueSwitch.isOn = true) : (self.sharedContinueSwitch.isOn = false)
             self.currentCellDataToBeEdited?.sharedEmail != "" ? (self.sharedEmailTextFieldHeightContsraint.constant = 60) : (self.sharedEmailTextFieldHeightContsraint.constant = 0)
             //Date Swich
+            if self.currentCellDataToBeEdited?.timestampcurrent != nil {
+                let date = Date.dateFromISOString((self.currentCellDataToBeEdited?.timestampcurrent)!)
+                datePicker.date = date
+            }
             self.datePickerHeightConstraint.constant = self.currentCellDataToBeEdited?.timestampcurrent == nil ? 0 : 169
             self.currentCellDataToBeEdited?.timestampcurrent != nil ? self.datePickerSwitch.setOn(true, animated: true) : self.datePickerSwitch.setOn(false, animated: true)
             //Shared Email Switch
