@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozz-s8-NdO">
-                                        <rect key="frame" x="161" y="751" width="94" height="30"/>
+                                        <rect key="frame" x="161" y="582" width="94" height="30"/>
                                         <state key="normal" title="Add to my list"/>
                                         <connections>
                                             <action selector="newTodoAdded:" destination="HbN-Ut-9gT" eventType="touchUpInside" id="Tgz-Co-Tgs"/>
@@ -50,9 +50,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mZZ-gb-w1T">
-                                        <rect key="frame" x="20" y="171" width="335" height="169"/>
+                                        <rect key="frame" x="20" y="171" width="335" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="169" id="HEK-dn-HDB"/>
+                                            <constraint firstAttribute="height" id="HEK-dn-HDB"/>
                                         </constraints>
                                         <date key="date" timeIntervalSinceReferenceDate="517142863.793872">
                                             <!--2017-05-22 10:47:43 +0000-->
@@ -71,7 +71,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snz-DS-KAy">
-                                        <rect key="frame" x="196" y="789" width="24" height="11"/>
+                                        <rect key="frame" x="196" y="620" width="24" height="11"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                         <color key="textColor" red="1" green="0.049691020330000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48W-9L-ScU">
-                                        <rect key="frame" x="20" y="355" width="101" height="21"/>
+                                        <rect key="frame" x="20" y="186" width="101" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -95,15 +95,16 @@
                                         </connections>
                                     </switch>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUr-Be-27Q">
-                                        <rect key="frame" x="314" y="350" width="51" height="31"/>
+                                        <rect key="frame" x="314" y="181" width="51" height="31"/>
                                         <connections>
                                             <action selector="addLocationChanged:" destination="HbN-Ut-9gT" eventType="valueChanged" id="9Rq-hw-1w7"/>
                                         </connections>
                                     </switch>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen" translatesAutoresizingMaskIntoConstraints="NO" id="htI-U9-1WE">
-                                        <rect key="frame" x="20" y="395" width="335" height="335"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="htI-U9-1WE">
+                                        <rect key="frame" x="20" y="226" width="335" height="335"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="335" id="dMu-21-uRX"/>
+                                            <constraint firstAttribute="width" constant="335" id="lSd-oi-iOZ"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -128,7 +129,6 @@
                                     <constraint firstItem="48W-9L-ScU" firstAttribute="leading" secondItem="mZZ-gb-w1T" secondAttribute="leading" id="V7F-gW-ulw"/>
                                     <constraint firstItem="Ske-H9-2oN" firstAttribute="top" secondItem="Vhj-6Y-88I" secondAttribute="bottom" constant="8" symbolic="YES" id="bbE-ku-XeY"/>
                                     <constraint firstItem="mZZ-gb-w1T" firstAttribute="top" secondItem="VHI-zj-uZT" secondAttribute="bottom" constant="10" id="bsq-w4-bpM"/>
-                                    <constraint firstItem="htI-U9-1WE" firstAttribute="width" secondItem="mZZ-gb-w1T" secondAttribute="width" id="gIm-z7-CRU"/>
                                     <constraint firstItem="vM9-jj-aPS" firstAttribute="centerY" secondItem="Ske-H9-2oN" secondAttribute="centerY" id="gin-VA-CNK"/>
                                     <constraint firstItem="Ozz-s8-NdO" firstAttribute="top" secondItem="htI-U9-1WE" secondAttribute="bottom" constant="21" id="nwK-75-laI"/>
                                     <constraint firstAttribute="trailing" secondItem="JSo-wI-YSb" secondAttribute="trailing" constant="12" id="rfU-Iv-tVs"/>
@@ -155,6 +155,7 @@
                         <outlet property="datePickerHeightConstraint" destination="HEK-dn-HDB" id="Ai0-0n-SJy"/>
                         <outlet property="datePickerSwitch" destination="kez-lY-m2N" id="fxo-zE-FFe"/>
                         <outlet property="errorMessage" destination="snz-DS-KAy" id="aer-6C-0We"/>
+                        <outlet property="imagePreview" destination="htI-U9-1WE" id="bvs-jJ-egE"/>
                         <outlet property="locationSnapshotImageHeightConstraint" destination="dMu-21-uRX" id="Kc1-Rg-b2A"/>
                         <outlet property="scrollView" destination="ese-ii-vwK" id="Y5z-il-MyM"/>
                         <outlet property="shareEmailTextField" destination="JSo-wI-YSb" id="Pgo-FG-hOQ"/>
@@ -168,7 +169,4 @@
             <point key="canvasLocation" x="52" y="144.3778110944528"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Screen" width="1520" height="1006"/>
-    </resources>
 </document>
