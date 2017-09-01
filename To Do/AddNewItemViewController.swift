@@ -76,8 +76,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     @IBAction func addLocationChanged(_ sender: Any) {
         if self.addLocationSwitch.isOn == true {
             let vc = UIStoryboard(name:"MapView", bundle:nil).instantiateViewController(withIdentifier: "mapView") as? MapViewController
-            self.addMapView.callingViewController(.callingFromAddNewItemViewController)
-            //vc.resultsArray = self.resultsArray
+            
             vc!.delegate = self
             self.navigationController?.pushViewController(vc!, animated:true)
             self.locationSnapshotImageHeightConstraint.constant = self.datePickerSwitch.isOn == false ? 0 : 335

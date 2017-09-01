@@ -124,11 +124,11 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         switch buttonName {
         case  "Edit":
-            print("case edit clicked from listITemTable")
             let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
             vc?.currentCellDataToBeEdited = self.currentCellDataToBeEdited
-            self.addNewItemView.callingViewController(.dataEdit)
+            vc?.modeCheck = "Edit"
             self.navigationController?.pushViewController(vc!, animated:true)
+            
         case "I am done":
             //TODO: DB call to save the new data back to DB
             break
@@ -159,7 +159,7 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func addNewTodo() {
         let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
-        self.addNewItemView.callingViewController(.dataNew)
+        vc?.modeCheck = "Add"
         self.navigationController?.pushViewController(vc!, animated:true)
         
     }
