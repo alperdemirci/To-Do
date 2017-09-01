@@ -24,6 +24,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     var screenshot: UIImage?
     var currentCellDataToBeEdited: Users?
     
+    @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var shareEmailTextField: UITextField!
     @IBOutlet weak var sharedContinueSwitch: UISwitch!
     @IBOutlet weak var sharedEmailTextFieldHeightContsraint: NSLayoutConstraint!
@@ -76,11 +77,15 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     
     @IBAction func addLocationChanged(_ sender: Any) {
         if self.addLocationSwitch.isOn == true {
+            self.locationSnapshotImageHeightConstraint.constant = 335
             let vc = UIStoryboard(name:"MapView", bundle:nil).instantiateViewController(withIdentifier: "mapView") as? MapViewController
             
             vc!.delegate = self
             self.navigationController?.pushViewController(vc!, animated:true)
-            self.locationSnapshotImageHeightConstraint.constant = self.datePickerSwitch.isOn == false ? 0 : 335
+        } else {
+            self.locationSnapshotImageHeightConstraint.constant = 0
+            self.screenshot = nil
+            
         }
     }
     
@@ -94,6 +99,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     
     func screenshotImage(image: UIImage) {
         self.screenshot = image
+        self.imagePreview.image = image
     }
     
     @IBAction func newTodoAdded(_ sender: Any) {
