@@ -126,7 +126,7 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
         case  "Edit":
             let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
             vc?.currentCellDataToBeEdited = self.currentCellDataToBeEdited
-            vc?.modeCheck = "Edit"
+            vc?.modeCheck = .dataEdit
             self.navigationController?.pushViewController(vc!, animated:true)
             
         case "I am done":
@@ -159,7 +159,7 @@ class ListItemTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func addNewTodo() {
         let vc = UIStoryboard(name:"AddNewItem", bundle:nil).instantiateViewController(withIdentifier: "addNewView") as? AddNewItemViewController
-        vc?.modeCheck = "Add"
+        vc?.modeCheck = .dataNew
         self.navigationController?.pushViewController(vc!, animated:true)
         
     }
