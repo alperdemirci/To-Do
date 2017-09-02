@@ -45,19 +45,8 @@ class MapViewController: UIViewController, UISearchBarDelegate, CLLocationManage
         self.mapView.showsUserLocation = true
     }
     
-    func callingViewController(_ toNewMode: mapViewMode) {
-        switch toNewMode {
-        case .callingFromAddNewItemViewController:
-            print("callingFromAddNewItemViewController")
-        case .callingFromListItemViewController:
-            print("callingFromListItemViewController")
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        // TODO: check the state of mapViewMode
-        // TODO: make a db call to get the data if mapViewMode is in the .callingFromListItemViewController state
     }
     @IBAction func searchPressed(_ sender: UIBarButtonItem) {
         searchController = UISearchController(searchResultsController: nil)

@@ -139,23 +139,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         self.scrollView.contentInset = contentInset
-
     }
-    
-//    func callingViewController(_ toNew: dataMode)  {
-//        switch toNew {
-//        case .dataNew:
-////            self.testing = "New"
-//            self.modeChecker()
-////            print("Data New")
-//            break
-//            //new settings will not change
-//        case .dataEdit:
-////            print("Data Edit", self.currentCellDataToBeEdited ?? " ")
-//            break
-//            //fetch user data from DB
-//        }
-//    }
     
     func modeChecker() {
         if self.modeCheck == .dataEdit {
@@ -181,13 +165,8 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
             if self.currentCellDataToBeEdited != nil {
                 print(self.currentCellDataToBeEdited ?? "Nothing ")
                         }
-
         } else if self.modeCheck == .dataNew {
             
-        }
-        
-        else {
-            print("Wrong mode")
         }
     }
 }
