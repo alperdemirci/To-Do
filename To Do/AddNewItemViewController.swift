@@ -18,7 +18,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
     var addMapView = MapViewController()
     // MARK: Outlets
     
-    var modeCheck: String = ""
+    var modeCheck: dataMode?
     var timeAndDate: String = ""
     
     var screenshot: UIImage?
@@ -158,11 +158,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
 //    }
     
     func modeChecker() {
-        
-        //TODO: datepicker show real date from db
-        //self.datePicker.date = self.currentCellDataToBeEdited?.timestamp
-
-        if self.modeCheck == "Edit" {
+        if self.modeCheck == .dataEdit {
             //map Switch
             self.currentCellDataToBeEdited?.locationAdded == "true" ? addLocationSwitch.setOn(true, animated: true) : addLocationSwitch.setOn(false, animated: true)
             //Shared Switch
@@ -186,7 +182,7 @@ class AddNewItemViewController: UIViewController, ScreenshotProtocol {
                 print(self.currentCellDataToBeEdited ?? "Nothing ")
                         }
 
-        } else if self.modeCheck == "Add" {
+        } else if self.modeCheck == .dataNew {
             
         }
         

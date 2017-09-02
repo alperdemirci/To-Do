@@ -103,8 +103,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjF-gw-luj">
-                                <rect key="frame" x="0.0" y="64" width="37" height="30"/>
-                                <state key="normal" title="Alper"/>
+                                <rect key="frame" x="0.0" y="64" width="30" height="30"/>
+                                <state key="normal" title="."/>
                                 <connections>
                                     <action selector="tempFastLoginAlper:" destination="eX4-7W-Ov6" eventType="touchUpInside" id="3vO-gY-1ff"/>
                                 </connections>
